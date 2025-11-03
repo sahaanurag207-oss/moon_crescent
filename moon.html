@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated CSS Moon</title>
+    <!-- Load Tailwind CSS for utility classes (e.g., centering and dark background) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Define the custom CSS provided by the user */
+        .moon {
+            /* The main container, acting as the dark side (shadow) of the moon */
+            background: rgb(0, 0, 0);
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .moon::before {
+            /* The light side of the moon (white circle) */
+            content: "";
+            background-color: #d2d0ab;
+            position: absolute;
+            display: block;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            /* Placing the white circle behind the black container */
+            z-index: -1;
+            /* Animation loop: 3.2s duration, linear, infinite, alternating direction */
+            animation: 3.2s animation linear infinite alternate;
+        }
+
+        /* Keyframes defining the crescent and full moon glow effect */
+        @keyframes animation {
+            0% {
+                /* Start: White circle is moved 40px right, creating a left crescent. */
+                transform: translateX(40px) scale(0.9);
+                box-shadow: none;
+            }
+            50% {
+                /* Mid-point: White circle is perfectly centered behind the black container (New Moon/Eclipse). A bright glow is added. */
+                transform: translate(0px, 0px) scale(1.02);
+                box-shadow: 0 0 10px #f4f2a9, 0 0 80px 2px #f2eb8b;
+            }
+            100% {
+                /* End: White circle is moved 40px left, creating a right crescent. */
+                transform: translateX(-40px) scale(0.9);
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<!-- Use Tailwind classes to create a dark sky background and center the moon -->
+<body class="bg-gray-900 flex items-center justify-center min-h-screen font-sans">
+
+    <div class="moon-container p-8 rounded-xl">
+        <!-- The moon element -->
+        <div class="moon"></div>
+    </div>
+
+</body>
+</html>
